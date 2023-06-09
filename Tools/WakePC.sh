@@ -6,12 +6,14 @@ if [ ! -f addresses.txt ]; then
     exit 1
 fi
 
+echo -e $1
+
 #Choose exit message based on script passing a variable
 if [ -z "$1" ]
 then
         exit_msg="\nQuitting script"
 else
-        exit_msg="\n1) Add PC\n2) Wake PC\n3) Quit"
+        exit_msg=$1
 fi
 
 # Read addresses into an array
@@ -59,8 +61,11 @@ mac_address=$(echo "$selected_address" | awk -F, '{print $3}')
 port=$(echo "$selected_address" | awk -F, '{print $4}')
 
 # Send packet using wakeonland and address info
+MYDIR="$(dirname "$(readlink -f "$0")")"
 echo "Trying to wake up $name: "
-wakeonlan -i ${ip_address} -p ${port} ${mac_address}
+bash $MYDIR/WoL.sh ${mac_address} ${ip_address} ${port}
+read
+#wakeonlan -i ${ip_address} -p ${port} ${mac_address}
 
 echo -e "${exit_msg}"
 exit 0

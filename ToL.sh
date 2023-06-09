@@ -25,7 +25,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-if [[ $1 = "-h" ]] || [[ $1 == "-help" ]]; then
+if [[ $1 = "-h" ]] || [[ $1 = "-help" ]]; then
 printf "TakeOnLan, tool for wake-on-lan configuration & usage.
 
 This tool is for taking control over your lan or something like that.
@@ -42,33 +42,34 @@ Delete PC:      Delete them from said list.
 
 Route PC:       Add saved address as static into ARP-routing table.(Helpful with RPi in my case)
 
-Wake PC:        Send magic packet to saved address. (Uses ethtool -package)
+Wake PC:        Send magic packet to saved address.
 
-Enable WoL:     Enable Wake-On-Lan for network interface on current computer.(uses wakeonlan -package) 
+PC's config:      PC's configurations. Show ARP-table, check wake-on support and enable wake-on for net interface.
 "
 
 else
+        echo "TAKE-ON-LAN:"
+        exit_msg="TAKE-ON-LAN:\n1) Add PC\n2) Delete PC \n3) Route PC\n4) Wake PC\n5) PC's config\n6) Exit"
         MYDIR="$(dirname "$(readlink -f "$0")")"
-
         PS3='Choose option: '
-        options=("Add PC" "Delete PC" "Route PC" "Wake PC" "Enable WoL" "Exit")
+        options=("Add PC" "Delete PC" "Route PC" "Wake PC" "PC's config" "Exit")
         select opt in "${options[@]}"
         do
                 case $opt in
                 "Add PC")
-                        bash $MYDIR/Tools/AddPC.sh "1"
+                        bash $MYDIR/Tools/AddPC.sh "$exit_msg"
                         ;;
                 "Delete PC")
-                        bash $MYDIR/Tools/DeletePC.sh "1"
+                        bash $MYDIR/Tools/DeletePC.sh "$exit_msg"
                         ;;
                 "Route PC")
-                        bash $MYDIR/Tools/RoutePC.sh "1"
+                        bash $MYDIR/Tools/RoutePC.sh "$exit_msg"
                         ;;
                 "Wake PC")
-                        bash $MYDIR/Tools/WakePC.sh "1"
+                        bash $MYDIR/Tools/WakePC.sh  "$exit_msg"
                         ;;
-                "Enable WoL")
-                        bash $MYDIR/Tools/EnableWoL.sh "1"
+                "PC's config")
+                        bash $MYDIR/Tools/ConfigPC.sh "$exit_msg"
                         ;; 
                 "Exit")
                 echo "Quitting..."

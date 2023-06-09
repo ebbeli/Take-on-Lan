@@ -11,7 +11,7 @@ if [ -z "$1" ]
 then
         exit_msg="\nQuitting script"
 else
-        exit_msg="\n1) Add PC\n2) Wake PC\n3) Quit"
+        exit_msg="$1"
 fi
 
 # Read addresses into an array
@@ -67,6 +67,7 @@ if [ $answer = "y" ] || [ $answer = "Y" ]; then
 	sed -i "${selected_index}d" addresses.txt
 else
 	echo "$name not deleted." 
+	read
 fi
 
 echo -e "${exit_msg}"

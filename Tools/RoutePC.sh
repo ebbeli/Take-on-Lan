@@ -11,7 +11,7 @@ if [ -z "$1" ]
 then
         exit_msg="\nQuitting script"
 else
-        exit_msg="\n1) Add PC\n2) Wake PC\n3) Quit"
+        exit_msg="$1"
 fi
 
 # Read addresses into an array
@@ -58,12 +58,16 @@ ip_address=$(echo "$selected_address" | awk -F, '{print $2}')
 mac_address=$(echo "$selected_address" | awk -F, '{print $3}')
 port=$(echo "$selected_address" | awk -F, '{print $4}')
 
-#Get default network interface
-ip="1.1.1.1"
-interface=$(ip route get ${ip} | sed -n 's/.*dev \([^\ ]*\).*/\1/p')
-
-# Send packet using wakeonland and address info
-echo "Trying to add $name to routing table: "
-sudo arp -s ${ip_address} ${mac_address}
+if [[ $ip_address = "255.255.255.255" ]]; then
+	read -p "$name's IP is 255.255.255.255. It's broadcast address, are you sure (Y/N): " confirm
+fi
+if [[ $confirm = "n" ]] || [[ $confirm = "N" ]]; then
+	echo "PC not added."
+	read
+else
+	# Send packet using wakeonland and address info
+	echo "Trying to add $name to routing table: "
+	sudo arp -s ${ip_address} ${mac_address}
+fi
 echo -e "${exit_msg}"
 exit 0
