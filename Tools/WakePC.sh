@@ -23,7 +23,7 @@ done < addresses.txt
 exit_opt=$((${#addresses[@]}+1));
 
 # Display addresses
-echo "Available addresses:"
+echo "Saved addresses:"
 for index in "${!addresses[@]}"; do
 	i=$((${index}+1));
 	IFS=',' read -ra address <<< ${addresses[$index]};
@@ -31,7 +31,7 @@ for index in "${!addresses[@]}"; do
 done
 	echo "$exit_opt) Exit "
 # Prompt for the selected address
-read -p "Enter the index of the address to use: " selected_index
+read -p "Which PC to wake: " selected_index
 
 
 

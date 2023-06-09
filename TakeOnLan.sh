@@ -36,9 +36,9 @@ Add PC:         You can save addresses to .txt file for later
 
 Delete PC:      Delete them from said list.
 
-Route PC:       Coming! Add saved address as static into ARP-routing table.(Helpful with RPi in my case)
+Route PC:       Add saved address as static into ARP-routing table.(Helpful with RPi in my case)
 
-Enable WoL:     Coming! Enable Wake-On-Lan on current computer.
+Enable WoL:     Enable Wake-On-Lan for network interface on current computer. 
 
 Wake PC:        Send magic packet to saved address.
 "
@@ -52,16 +52,16 @@ else
         do
                 case $opt in
                 "Add PC")
-                bash $MYDIR/Tools/AddPC.sh "1"
+                        bash $MYDIR/Tools/AddPC.sh "1"
                         ;;
                 "Delete PC")
-                bash $MYDIR/Tools/DeletePC.sh "1"
+                        bash $MYDIR/Tools/DeletePC.sh "1"
                         ;;
                 "Route PC")
-                        echo "Under construction."
+                        bash $MYDIR/Tools/RoutePC.sh "1"
                         ;;
                 "Enable WoL")
-                        echo "Under construction."
+                        bash $MYDIR/Tools/EnableWoL.sh "1"
                         ;; 
                 "Wake PC")
                         bash $MYDIR/Tools/WakePC.sh "1"

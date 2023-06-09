@@ -23,15 +23,15 @@ done < addresses.txt
 exit_opt=$((${#addresses[@]}+1));
 
 # Display addresses
-echo "Available addresses:"
+echo "Saved addresses:"
 for index in "${!addresses[@]}"; do
 	i=$((${index}+1));
-	IFS=',' read -ra address <<< $addresses[$index];
+	IFS=',' read -ra address <<< ${addresses[$index]};
 	echo "$i) ${address[0]}: ${address[1]}"
 done
 	echo "$exit_opt) Exit "
 # Prompt for the selected address
-read -p "Enter the index of the address to use: " selected_index
+read -p "Which address to add: " selected_index
 
 
 
@@ -58,9 +58,12 @@ ip_address=$(echo "$selected_address" | awk -F, '{print $2}')
 mac_address=$(echo "$selected_address" | awk -F, '{print $3}')
 port=$(echo "$selected_address" | awk -F, '{print $4}')
 
-# Send packet using wakeonland and address info
-echo "Trying to wake up $name: "
-wakeonlan -i ${ip_address} -p ${port} ${mac_address}
+#Get default network interface
+ip="1.1.1.1"
+interface=$(ip route get ${ip} | sed -n 's/.*dev \([^\ ]*\).*/\1/p')
 
+# Send packet using wakeonland and address info
+echo "Trying to add $name to routing table: "
+sudo arp -s ${ip_address} ${mac_address}
 echo -e "${exit_msg}"
 exit 0
