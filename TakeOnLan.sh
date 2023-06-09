@@ -52,10 +52,10 @@ else
         do
                 case $opt in
                 "Add PC")
-                bash $MYDIR/AddPC.sh "1"
+                bash $MYDIR/Tools/AddPC.sh "1"
                         ;;
                 "Delete PC")
-                bash $MYDIR/DeletePC.sh "1"
+                bash $MYDIR/Tools/DeletePC.sh "1"
                         ;;
                 "Route PC")
                         echo "Under construction."
@@ -64,7 +64,7 @@ else
                         echo "Under construction."
                         ;; 
                 "Wake PC")
-                        bash $MYDIR/WakePC.sh "1"
+                        bash $MYDIR/Tools/WakePC.sh "1"
                         ;;
                 "Exit")
                 echo "Quitting..."

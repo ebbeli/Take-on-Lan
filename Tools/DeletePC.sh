@@ -23,20 +23,20 @@ done < addresses.txt
 exit_opt=$((${#addresses[@]}+1));
 
 # Display addresses
-echo "Available addresses:"
+echo "Saved addresses:"
 for index in "${!addresses[@]}"; do
 	i=$((${index}+1));
-	IFS=',' read -ra address <<< $addresses[$index];
+	IFS=',' read -ra address <<< ${addresses[$index]};
 	echo "$i) ${address[0]}: ${address[1]}"
 done
 	echo "$exit_opt) Exit "
 # Prompt for the selected address
-read -p "Enter the index of the address to use: " selected_index
+read -p "Address to Delete: " selected_index
 
 
 
 # Check exit and invalid input
-if [ $selected_index -eq $exit_opt ]
+if [ $selected_index = $exit_opt ]
 then
 	echo -e "${exit_msg}"
 	exit 0
@@ -58,9 +58,16 @@ ip_address=$(echo "$selected_address" | awk -F, '{print $2}')
 mac_address=$(echo "$selected_address" | awk -F, '{print $3}')
 port=$(echo "$selected_address" | awk -F, '{print $4}')
 
-# Send packet using wakeonland and address info
-echo "Trying to wake up $name: "
-wakeonlan -i ${ip_address} -p ${port} ${mac_address}
+# Confirm delete
+echo "$name's address: IP: ${ip_address} MAC: ${mac_address} PORT: $port"
+read -p "Confirm deletion of $name (Y/N): " answer
+
+if [ $answer = "y" ] || [ $answer = "Y" ]; then
+	echo "Deleting $name.."
+	sed -i "${selected_index}d" addresses.txt
+else
+	echo "$name not deleted." 
+fi
 
 echo -e "${exit_msg}"
 exit 0
