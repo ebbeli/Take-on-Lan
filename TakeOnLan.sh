@@ -29,7 +29,11 @@ if [[ $1 = "-h" ]] || [[ $1 == "-help" ]]; then
 printf "TakeOnLan, tool for wake-on-lan configuration & usage.
 
 This tool is for taking control over your lan or something like that.
+
 Use it to manage Wake-on-lan on your LAN.
+
+Install ethtool and wakeonlan with your package manager to get all features working.
+
 Launch using 'sudo bash TakeOnLan.sh' to use all features.
 
 Add PC:         You can save addresses to .txt file for later
@@ -38,16 +42,16 @@ Delete PC:      Delete them from said list.
 
 Route PC:       Add saved address as static into ARP-routing table.(Helpful with RPi in my case)
 
-Enable WoL:     Enable Wake-On-Lan for network interface on current computer. 
+Wake PC:        Send magic packet to saved address. (Uses ethtool -package)
 
-Wake PC:        Send magic packet to saved address.
+Enable WoL:     Enable Wake-On-Lan for network interface on current computer.(uses wakeonlan -package) 
 "
 
 else
         MYDIR="$(dirname "$(readlink -f "$0")")"
 
         PS3='Choose option: '
-        options=("Add PC" "Delete PC" "Route PC" "Enable WoL" "Wake PC" "Exit")
+        options=("Add PC" "Delete PC" "Route PC" "Wake PC" "Enable WoL" "Exit")
         select opt in "${options[@]}"
         do
                 case $opt in
@@ -60,12 +64,12 @@ else
                 "Route PC")
                         bash $MYDIR/Tools/RoutePC.sh "1"
                         ;;
-                "Enable WoL")
-                        bash $MYDIR/Tools/EnableWoL.sh "1"
-                        ;; 
                 "Wake PC")
                         bash $MYDIR/Tools/WakePC.sh "1"
                         ;;
+                "Enable WoL")
+                        bash $MYDIR/Tools/EnableWoL.sh "1"
+                        ;; 
                 "Exit")
                 echo "Quitting..."
                         break
