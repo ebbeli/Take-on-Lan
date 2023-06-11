@@ -33,7 +33,7 @@ for index in "${!addresses[@]}"; do
 done
 	echo "$exit_opt) Main Menu "
 # Prompt for the selected address
-read -p "Which PC to wake: " selected_index
+read -p "Which PC to ping: " selected_index
 
 
 
@@ -60,12 +60,11 @@ ip_address=$(echo "$selected_address" | awk -F, '{print $2}')
 mac_address=$(echo "$selected_address" | awk -F, '{print $3}')
 port=$(echo "$selected_address" | awk -F, '{print $4}')
 
-# Send packet using wakeonland and address info
-MYDIR="$(dirname "$(readlink -f "$0")")"
-echo "Trying to wake up $name: "
-bash $MYDIR/WoL.sh ${mac_address} ${ip_address} ${port}
-read
-#wakeonlan -i ${ip_address} -p ${port} ${mac_address}
+
+# Send pings x p_times
+read -p "How many packets: " p_time
+echo "Sending ping to $name.."
+ping -c ${p_time} ${ip_address}
 
 echo -e "${exit_msg}"
 exit 0

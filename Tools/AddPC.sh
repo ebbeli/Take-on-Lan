@@ -56,11 +56,11 @@ for ((i=1; i<=$pc_count; i++)); do
 		fi
 	done
     read -p "$name's IP (Empty = 255.255.255.255): " ip_add
-	read -p "$name's Port (Empty = 9) $i:" port_add
+	read -p "$name's Port (Empty = 9): " port_add
 	# Set default values if empty
 	[ -z "$ip_add" ] && ip_add=255.255.255.255
 	[ -z "$port_add" ] && port_add=9
-	# Append to fle
+	# Append to file
 	echo "$name,$ip_add,$mac_add,$port_add" >> addresses.txt
 	echo "$name was saved"
 	read

@@ -1,7 +1,7 @@
 
 #!/bin/bash# TakeOnLan.sh
 # Project homepage: https://github.com/ebbeli
-# Version 0.01
+# Version 0.21
 
 # MIT License
 
@@ -49,10 +49,10 @@ PC's config:      PC's configurations. Show ARP-table, check wake-on support and
 
 else
         echo "TAKE-ON-LAN:"
-        exit_msg="TAKE-ON-LAN:\n1) Add PC\n2) Delete PC \n3) Route PC\n4) Wake PC\n5) PC's config\n6) Exit"
+        exit_msg="TAKE-ON-LAN:\n1) Add PC\n2) Delete PC \n3) Route PC\n4) Ping PC\n5) Wake PC\n6) PC's config\n7) Exit"
         MYDIR="$(dirname "$(readlink -f "$0")")"
         PS3='Choose option: '
-        options=("Add PC" "Delete PC" "Route PC" "Wake PC" "PC's config" "Exit")
+        options=("Add PC" "Delete PC" "Route PC" "Ping PC" "Wake PC" "PC's config" "Exit")
         select opt in "${options[@]}"
         do
                 case $opt in
@@ -64,6 +64,9 @@ else
                         ;;
                 "Route PC")
                         bash $MYDIR/Tools/RoutePC.sh "$exit_msg"
+                        ;;
+                "Ping PC")
+                        bash $MYDIR/Tools/PingPC.sh "$exit_msg"
                         ;;
                 "Wake PC")
                         bash $MYDIR/Tools/WakePC.sh  "$exit_msg"

@@ -29,7 +29,7 @@ for index in "${!addresses[@]}"; do
 	IFS=',' read -ra address <<< ${addresses[$index]};
 	echo "$i) ${address[0]}: ${address[1]}"
 done
-	echo "$exit_opt) Exit "
+	echo "$exit_opt) Main Menu "
 # Prompt for the selected address
 read -p "Which address to add: " selected_index
 
