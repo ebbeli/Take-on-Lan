@@ -26,7 +26,9 @@
 # SOFTWARE.
 
 if [[ $1 = "-h" ]] || [[ $1 = "-help" ]]; then
-printf "TakeOnLan, tool for wake-on-lan configuration & usage.
+printf "----
+
+TakeOnLan, tool for wake-on-lan configuration & usage.
 
 This tool is for taking control over your lan or something like that.
 
@@ -36,23 +38,25 @@ Install ethtool and wakeonlan with your package manager to get all features work
 
 Launch using 'sudo bash TakeOnLan.sh' to use all features.
 
-1. SAVED PCs:         Select saved PC from list to use the actions:
- 1.1 WAKE UP:         Send magic packet using saved info to wake PC.
-  1.2 PING:           Send ping to saved IP to test if PC is up and running.
-   1.3 ADD ARP:       Add saved IP & MAC as static into 'Address Resolution Protocol'-table.
-    1.4 DELETE:       Delete PC from said list and addresses.txt.
-     1.5 CHANGE PC:   Choose another PC from list.
-    
-2. ADD PC:      Use nickname* to save IP, MAC* and port to addresses.txt.*=Required Info.
+1. SAVED PCs: Select saved PC from list to use the actions:
+   1.1 WAKE UP: Send magic packet using saved info to wake PC.
+   1.2 PING: Send ping to saved IP to test if PC is up and running.
+   1.3 ADD ARP: Add saved IP & MAC as static into 'Address Resolution Protocol'-table.
+   1.4 DELETE: Delete PC from said list and addresses.txt.
+   1.5 CHANGE PC: Choose another PC from list.
+   
+2. ADD PC: Use nickname* to save IP, MAC* and port to addresses.txt.\*=Required Info.
 
-3. PC's config:       PC's configurations. Network interface configuration and ARP-table.
- 3,1 INTERFACES:      Show PC's network interfaces and their IP, MAC & other info.
-  3.2 SET IFACE:      Enter interface name or get automatically currently used one.
-   3.4 WOL-CONFIG:    Show selected interface's wake-on support and current configuration. 
-    3.5 ENABLE WOL:   Enable wake-on for currently sected interface.
-     3.6 ARP-TABLE:   Show ARP-table to see known IP- & MAC-address combinations.
+3. PC's config: PC's configurations. Network interface configuration and ARP-table.
+   3,1 INTERFACES: Show PC's network interfaces and their IP, MAC & other info.
+   3.2 SET IFACE: Enter interface name or get automatically currently used one.
+   3.4 WOL-CONFIG: Show selected interface's wake-on support and current configuration.
+   3.5 ENABLE WOL: Enable wake-on for currently sected interface.
+   3.6 ARP-TABLE: Show ARP-table to see known IP- & MAC-address combinations.
 
-4. QUIT:        Exit application.
+4. QUIT: Exit application.
+
+----
 "
 
 else
