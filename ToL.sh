@@ -36,45 +36,45 @@ Install ethtool and wakeonlan with your package manager to get all features work
 
 Launch using 'sudo bash TakeOnLan.sh' to use all features.
 
-Add PC:         You can save addresses to .txt file for later
+1. SAVED PCs:         Select saved PC from list to use the actions:
+ 1.1 WAKE UP:         Send magic packet using saved info to wake PC.
+  1.2 PING:           Send ping to saved IP to test if PC is up and running.
+   1.3 ADD ARP:       Add saved IP & MAC as static into 'Address Resolution Protocol'-table.
+    1.4 DELETE:       Delete PC from said list and addresses.txt.
+     1.5 CHANGE PC:   Choose another PC from list.
+    
+2. ADD PC:      Use nickname* to save IP, MAC* and port to addresses.txt.*=Required Info.
 
-Delete PC:      Delete them from said list.
+3. PC's config:       PC's configurations. Network interface configuration and ARP-table.
+ 3,1 INTERFACES:      Show PC's network interfaces and their IP, MAC & other info.
+  3.2 SET IFACE:      Enter interface name or get automatically currently used one.
+   3.4 WOL-CONFIG:    Show selected interface's wake-on support and current configuration. 
+    3.5 ENABLE WOL:   Enable wake-on for currently sected interface.
+     3.6 ARP-TABLE:   Show ARP-table to see known IP- & MAC-address combinations.
 
-Route PC:       Add saved address as static into ARP-routing table.(Helpful with RPi in my case)
-
-Wake PC:        Send magic packet to saved address.
-
-PC's config:      PC's configurations. Show ARP-table, check wake-on support and enable wake-on for net interface.
+4. QUIT:        Exit application.
 "
 
 else
         echo "TAKE-ON-LAN:"
-        exit_msg="TAKE-ON-LAN:\n1) Add PC\n2) Delete PC \n3) Route PC\n4) Ping PC\n5) Wake PC\n6) PC's config\n7) Exit"
+        exit_msg="TAKE-ON-LAN:\n1) Saved PCs\n2) Add PC\n3) This PC\n4} Quit"
         MYDIR="$(dirname "$(readlink -f "$0")")"
         PS3='Choose option: '
-        options=("Add PC" "Delete PC" "Route PC" "Ping PC" "Wake PC" "PC's config" "Exit")
+        options=("Saved PCs" "Add PC" "This PC" "Quit")
         select opt in "${options[@]}"
         do
                 case $opt in
+                "Saved PCs")
+                        bash $MYDIR/Tools/Actions.sh "$exit_msg"
+                        ;;
                 "Add PC")
                         bash $MYDIR/Tools/AddPC.sh "$exit_msg"
                         ;;
-                "Delete PC")
-                        bash $MYDIR/Tools/DeletePC.sh "$exit_msg"
-                        ;;
-                "Route PC")
-                        bash $MYDIR/Tools/RoutePC.sh "$exit_msg"
-                        ;;
-                "Ping PC")
-                        bash $MYDIR/Tools/PingPC.sh "$exit_msg"
-                        ;;
-                "Wake PC")
-                        bash $MYDIR/Tools/WakePC.sh  "$exit_msg"
-                        ;;
-                "PC's config")
-                        bash $MYDIR/Tools/ConfigPC.sh "$exit_msg"
+
+                "This PC")
+                        bash $MYDIR/Tools/ThisPC.sh "$exit_msg"
                         ;; 
-                "Exit")
+                "Quit")
                 echo "Quitting..."
                         break
                         ;;
