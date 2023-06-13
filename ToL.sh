@@ -26,8 +26,7 @@
 # SOFTWARE.
 
 if [[ $1 = "-h" ]] || [[ $1 = "-help" ]]; then
-printf "----
-
+printf "
 TakeOnLan, tool for wake-on-lan configuration & usage.
 
 This tool is for taking control over your lan or something like that.
@@ -56,7 +55,6 @@ Launch using 'sudo bash TakeOnLan.sh' to use all features.
 
 4. QUIT: Exit application.
 
-----
 "
 
 else
