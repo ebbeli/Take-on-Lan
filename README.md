@@ -41,6 +41,7 @@ Select saved PC from list to use the actions
 - ADD ARP : Add saved IP & MAC as static into 'Address Resolution Protocol'-table.
 - DELETE : Delete PC from said list and addresses.txt
 - CHANGE PC : Choose another PC from list.
+- MAIN MENU
 
 #### ADD PC
 
@@ -57,7 +58,8 @@ PC's configurations. Network interface configuration and ARP-table.
 - WOL-CONFIG : Show selected interface's wake-on support and current configuration.
 - ENABLE WOL : Enable wake-on for currently sected interface.
 - ARP-TABLE : Show ARP-table to see known IP- & MAC-address combinations.
-- Help/Guide : Self explanatory
+- HELP/GUIDE : Self explanatory
+- MAIN MENU
 
 #### QUIT
 
