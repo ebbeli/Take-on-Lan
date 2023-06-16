@@ -5,6 +5,7 @@ Made for configuring device's for 'wake on lan'. Then controlling whole network 
 Main idea was that i don't have to keep my personal server's running up all the time and i can save electricity with only one low-power device running on the network.
 I tried to use purely shell and avoid package requirements for easy installations and wider compatibility.
 
+
 ### Depencies
 
 `sudo apt isntall ethtool`
@@ -22,13 +23,15 @@ I tried to use purely shell and avoid package requirements for easy installation
 - Tested OS: Raspbian Lite (Buster), Fedora 38, Ubuntu 22.04.
 - Tested H/W: Raspberry Pi 1B, Thinkpad T480, Optiplex 5050 Micro
 
-## Help
+### Help
 
 `bash ToL -h / bash ToL -help`
 
 ## Features
 
-TakeOnLan, tool for wake-on-lan configuration & usage.
+Take-on-Lan is tool for wake-on-lan configuration & usage with simple TUI(Text-based user interface) . With simple menu, it can make tasks with tedious repetation easier and faster.
+
+### Menu Items:
 
 #### SAVED PCs
 
@@ -61,7 +64,7 @@ PC's configurations. Network interface configuration and ARP-table.
 
 Exit application.
 
-## EXTRA / USE AS COMMAND
+### EXTRA / USE AS COMMAND
 
 If you want to use this as basic command tool wihout using it from directory.
 
@@ -75,3 +78,5 @@ If you want to use this as basic command tool wihout using it from directory.
    - `~/.bash_profile`
 5. Now you can use it at command line with(Remember case sensitivity):
    - `ToL`
+
+Ps. After doing that you can add your own scripts to folder to use as commands. It's convient so you can easily separate them from installed ones.
