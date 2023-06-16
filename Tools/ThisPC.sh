@@ -41,16 +41,24 @@ do
                     echo "You haven't chosen interface."
                     echo "Give or get interface name with option: 2)"
                 else 
-                    ethtool ${set_iface} | grep -i wake
+                    sudo ethtool ${set_iface} | grep -i wake
                 fi
                 ;;
         "Enable WoL")
                 if [[ $set_iface = "None" ]]; then
                     echo "Give or get interface name with option: 2)"
                 else
-                    ethtool -s ${set_iface} wol g
+                    echo "Trying to enable wake-on for: $set_iface"
+                    sudo ethtool -s ${set_iface} wol g
+                    TEST_VAR="$(sudo ethtool ${set_iface} | grep -i 'Wake-on: g')"
+                    if [[ "$TEST_VAR" == *"Wake-on: g"* ]]; then
+                        echo "Wake-on enabled succesfully"
+                   else
+                        echo "Couldn't enable wake-on"
+                   fi
                 fi
                 ;; 
+
         "ARP-Table")
                 echo "Showing 'Address Resolution Protocol'-table."
                 arp -a

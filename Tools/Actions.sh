@@ -11,11 +11,21 @@ WakePC() {
 }
 
 PingPC() {
-    # Send pings x p_times
-    read -p "How many packets: " p_time
-    echo "Sending ping to $name.."
-    ping -c ${p_time} ${ip_address}
-    echo -e "${menu}"
+    if [[ $ip_address = "255.255.255.255" ]]; then
+        read -p "It's broadcast address, are you sure? (Y/N): " to_ping
+        if [[ $to_ping = "y" ]] || [[ $to_ping = "Y" ]]; then
+                read -p "How many packets: " p_time
+                ping -c $p_time -b $ip_address
+        else
+                echo "Ping not send"
+        fi
+    else
+         # Send pings x p_times
+         read -p "How many packets: " p_time
+        echo "Sending ping to $name.."
+        ping -c ${p_time} ${ip_address}
+        echo -e "${menu}"
+    fi
 }
 
 RoutePC() {
